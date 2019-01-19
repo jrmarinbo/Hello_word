@@ -74,7 +74,7 @@ x <- rnorm(5)
 
 # --------------------------- #
 x
-
+  
 ```
 
 Los comentarios sobre el código podemos agregarlos con _#_.
@@ -86,7 +86,7 @@ _Ejercicio 2_
 Consulte la ayuda a través de R estudio para entender en qué consiste el paquete "base" de R. ¿Qué ofrece el paquete, explore su contenido? 
 
 R/
-
+De acuerdo a la ayuda el paquete base tiene las funciones basicas aritmeticas
 
 
 
@@ -122,6 +122,8 @@ Escriba un vector de enteros con cuatro elementos
 
 ```{R example2}
 # Escriba un vector de enteros con cuatro elementos (1 línea de código)
+x <- 2
+vector <- c(x,x*2,x*4,x*6)
 
 # --------------------------- #
 vector
@@ -220,7 +222,8 @@ _Ejercicio 4_
 
 ```{R example3}
 # Por favor escriba los dos vectores en el siguiente espacio (2 lineas de código)
-
+age <-c(1,3,5,2,1)
+weight <-c(4.4, 5.3, 7.2, 5.2, 8.5)
 
 # --------------------------- #
 print("Vector de Age")
@@ -261,8 +264,8 @@ _Ejercicio 5_
 ```{R example4}
 # Escriba el código que permita instalar y cargar los dos paquetes (cuatro líneas)
 
-
-
+install.packages("tidyverse")
+install.packages("nycflights13")
 
 # --------------------------- #
 ```
@@ -282,7 +285,8 @@ _Ejercicio 6_
 
 Utilice la ayuda y explore la utilidad de las funciones "abs" y "sqrt".
 
-R/
+R/abs (valor absoluto de x)
+sqrt (raiz cuadrada de x)
 
 
 
@@ -291,7 +295,7 @@ Para nuestro próximo ejercicio utilizaremos la función _seq_, por favor utilice 
 _Ejercicio 7_
 ```{R example5}
 # Escriba el código que utilice la funcion seq y cree un vector de valores del 1 hasta el 10 (1 línea de código)
-
+vector <-seq(1,10,2)
 # --------------------------- #
 vector
 
@@ -316,6 +320,9 @@ for (number in array)
 lista <- seq(1,10)
 pairList(lista)
 
+ejemplo <- function(x) sqrt(x%*%x)
+ejemplo(4)
+
 ```
 
 
@@ -330,6 +337,8 @@ _Ejercicio 8_
 Cree un vector con nombre a y asignele los siguientes valores: k, j, h, a, c y m. 
 ```{R vector2}
 # 1 linea de código
+a <-c("k", "j", "h", "a", "c", "m")
+a
 
 # --------------------------- #
 ```
@@ -340,11 +349,11 @@ a[3]
 a[c(1, 3, 5)]
 a[2:6]
 ```
-R1/ 
+R1/ a[3] me retorna la posicion 3 del vector a
 
-R2/
+R2/a[c(1, 3, 5)] me retorna las posiciones 1, 3 y 5 del vector
 
-R3/
+R3/a[2:6] me retorna las posiciones desde la 2 hasta la 6
 
 ###Matriz
 
@@ -364,10 +373,14 @@ Observe como fue el proceso de ingreso de los datos, realice los cambios necesar
 _Ejercicio 9_
 ```{R matrizExample2}
 # 2 lineas de código
-
+x <- matrix(1:20, nrow=5, ncol=4,byrow = TRUE)
+x
+print("")
+class(x)
 
 # -------------------------
 ```
+colocando byrow en TRUE le estoy diciendo que empiece a llenar la matrix por filas
 
 
 Ahora veamos como obtener los elementos de la matriz, para accederlos escribimos los indices(número) de la siguiente forma X[_i_,_j_]$ donde _i_ corresponde al indice de la fila y _j_ al indice de las columnas.
@@ -378,6 +391,16 @@ x[1, ] #obtenemos los elementos de la primera fila
 x[5 , 3] #obtenemos el elemento ubicado en la quinta fila y tercera columna 
 ```
 
+para cambiar valores
+
+```{R matrizExample3}
+x[ , 2] <- 50 #cambio todos los elementos de la columna 2 por 50
+x
+x[1, ] #obtenemos los elementos de la primera fila
+x
+x[5 , 3] <- 30 #cambio el elementos de la posicion 5 columna 3 por 30
+x
+```
 
 La función _row.names()_ nos permite asignar nombres a las filas de la matriz, ejecute el siguiente código y observe el resultado.
 
@@ -421,7 +444,8 @@ Vamos a utilizar un conjunto de datos ( __dataset__ ) de los vuelos realizados e
 ```{R provided}
 # La siguiente línea de código especifica que vamos a utilizar "flights" del paquete nycflights13, el uso de :: se realiza con la finalidad que no se presenten problemas si hay más variables "flights" en nuestro entorno de trabajo.
 nycflights13::flights
-flights
+flights <-nycflights13::flights
+
 ```
 
 El _Data frame_ es más general que una matriz ya que puede almacenar diferentes tipos de datos (númericos, carácteres, etc.). Es la estructura más utilizada en los proyectos de R. 
@@ -493,7 +517,7 @@ Vamos a utilizar el siguiente código que utilizará el dataset de mtcars y las va
 
 
 ```{r attachExample}
-summary(mtcars$mpg)
+summary(mtcars$mpg) #resumen los calculos estadisticos de la columna mpg de la base de datos mtcards
 plot(mtcars$mpg, mtcars$disp)
 plot(mtcars$mpg, mtcars$wt)
 ```
