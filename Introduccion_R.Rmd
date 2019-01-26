@@ -181,10 +181,10 @@ R por defecto inicializa su trabajo obteniendo las entradas desde el teclado y d
 Descargue el archivo example2.R, en el archivo actual de R que se encuentra trabajando utilice la función source() y dentro del paréntesis escriba el nombre del archivo descargado, es decir, source("example2.R). Finalmente, ejecute la anterior instrucción y observará que hará un llamado a un archivo externo con líneas de código. 
 
 ```{R inputExample}
-source("C:/Users/94431200/Documents/GitHub/Hello_word/example2.R")
+source("../example2.R")
 ```
 ```{R outputExample, echo=FALSE}
-source("C:/Users/94431200/Documents/GitHub/Hello_word/example3.R")
+source("../example3.R")
 ```
 
 Existen varias funciones que nos permiten crear archivos de distinto tipo, por ejemplo:
@@ -264,8 +264,8 @@ _Ejercicio 5_
 ```{R example4}
 # Escriba el código que permita instalar y cargar los dos paquetes (cuatro líneas)
 
-# install.packages("tidyverse")
-# install.packages("nycflights13")
+install.packages("tidyverse")
+install.packages("nycflights13")
 
 # --------------------------- #
 ```
@@ -393,7 +393,7 @@ x[5 , 3] #obtenemos el elemento ubicado en la quinta fila y tercera columna
 
 para cambiar valores
 
-```{R matrizExample3_1}
+```{R matrizExample3}
 x[ , 2] <- 50 #cambio todos los elementos de la columna 2 por 50
 x
 x[1, ] #obtenemos los elementos de la primera fila
@@ -533,12 +533,12 @@ detach(mtcars)
 ```
 Este enfoque tiene limitaciones cuando los objetos almacenados en memoria tienen el mismo nombre. 
 
-```{r attachExample3, include = TRUE}
-#mpg <- c(25, 36, 47)
-#attach(mtcars)
-#  plot(mpg, wt)
-#detach(mtcars)
-#mpg
+```{r attachExample3}
+mpg <- c(25, 36, 47)
+attach(mtcars)
+  plot(mpg, wt)
+detach(mtcars)
+mpg
 ```
 
 Para estos casos se puede utilizar un enfoque distinto a través de la función _with()_, apliquemos esta alternativa con el ejemplo anterior. ¿Qué utilidad observa?
@@ -562,7 +562,7 @@ with(mtcars, {
   stats <- summary(mpg)
   stats
 })
-#stats
+stats
  
 ```
 Si es necesario crear o asignar a un objeto dentro de este debemos utilizar el operador <<-
@@ -572,7 +572,7 @@ with(mtcars, {
   keepstats <<- summary(mpg)
 })
 keepstats
-#nokeepstats
+nokeepstats
 
  
 ```
@@ -590,13 +590,12 @@ diabetesFactor <- factor(diabetes)
 Cree el siguiente factor y observe el orden de los niveles
 
 ```{R factorExample2}
-x <- c("yes", "yes", "no", "yes", "no")
-xfactor <- factor(x)
+x <- factor(c("yes", "yes", "no", "yes", "no"))
 ```
 
 Para cambiar el orden de los niveles se especifica el parámetro "levels" en el orden deseado
 ```{R factorExample3}
-xfactor <- factor(c("yes", "yes", "no", "yes", "no"), levels = c("yes", "no"))
+x <- factor(c("yes", "yes", "no", "yes", "no"), levels = c("yes", "no"))
 ```
 _Ejercicio 10_
 
@@ -606,7 +605,7 @@ Escriba y ejecute el código necesario para crear el factor ordinal ```PartientSt
 # 1 linea de código
 
 # -------------------
-PatientStatus <- factor(c("Poor","Improved","Excellent"), levels = c("Poor","Improved","Excellent"))
+PatientStatus
 ```
 
 _Ejercicio 11_
@@ -614,26 +613,22 @@ _Ejercicio 11_
 Si x <- c(1, 2, 3, 3, 5, 3, 2, 4, NA), ¿cuáles son los niveles de factor(x)?
 ```{R ejercicioFactor2}
 # 1 linea de código
-x <- c(1, 2, 3, 3, 5, 3, 2, 4, NA)
-xfactor<- factor(x)
 
 # -------------------
 x
 ```
 
-R/LOS NIVELES SON 1,2,3,4,5, Y NA
+R/
 
 _Ejercicio 12_
 
 Sea x <- c(11, 22, 47, 47, 11, 47, 11). Si ejecutamos la expresión factor(x, levels=c(11,22,47), ordered=TRUE) cuál será el cuarto elemento que se despliega en la salida?
 
-R/47
+R/
 
 ```{R ejercicioFactor3}
 # 2 lineas de código
-x <- c(11, 22, 47, 47, 11, 47, 11)
-xfactor<- factor(x, levels = c(11,22,47),ordered=TRUE)
-xfactor[4]
+
 
 # -------------------
 ```
@@ -645,13 +640,11 @@ a. factor(z[3]) <-"b"
 b. levels(z[3]) <-"b"
 c. z[3] <-"b"
 
-R/EL COMANDO A EJECUTAR ES EL C
+R/
 
 ```{R ejercicioFactor4}
 # 2 lineas de código
-z <-c("p", "a" , "g", "t", "b")
-z[3] <-"b"
-z[3:5] <-"b"
+
 
 # -------------------
 z
@@ -675,7 +668,6 @@ j <- matrix(1:10, nrow = 5)
 k <- c("one", "two", "trhee")
 mylist <- list(title=g, ages=h, j, k) # create a list
 mylist
-mylist[3]
 
 ```
 Podemos acceder a los elementos de la lista de la siguiente forma.
@@ -716,12 +708,8 @@ Para el siguiente ejercicio cargue el archivo "parks.csv" y asignelo a una varia
 
 _Ejercicio 14_
 
-```{R example14}
+```{R example1}
 # Escriba en el siguiente espacio el código que permita cargar el archivo parks.csv (1 línea de código)
-
-parks <- read.csv("C:/Users/94431200/Documents/GitHub/Hello_word/parks.csv")
-
-View(parks)
 
 # --------------------------- #
 ```
@@ -734,22 +722,21 @@ _Ejercicio 15_
 Ejecute el siguiente código e ingrese los elementos que completen el dataframe.
 
 ```{R Inexample1}
-#mydata <- data.frame(age=numeric(0), gender=character(0), weight=numeric(0))
-#View(mydata)
-#mydata <- edit(mydata)
+mydata <- data.frame(age=numeric(0), gender=character(0), weight=numeric(0))
+mydata <- edit(mydata)
 
 ```
-CON EDIT ME SALE UNA NUEVA PANTALLA CON EL DATAFRAME
+
 ## Importando desde Excel
 
 La mejor forma es importar archivos tipo CSV (Comma Separated Values) generados desde Excel. Dado el caso se requiera importar directamente desde el archivo entonces podemos utilizar las funciones del paquete xlsx
 
 ```{R Inexample2}
 #install.packages("xlsx")
-#library("xlsx")
-#workbook <- "" # dirección del archivo
-#mydataframe <- read.xlsx(workbook, 1)
-#View(mydataframe)
+library("xlsx")
+workbook <- "" # dirección del archivo
+mydataframe <- read.xlsx(workbook, 1)
+View(mydataframe)
 ```
 
 
