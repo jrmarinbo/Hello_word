@@ -1,0 +1,46 @@
+---
+title: "Visualizaciones con ggplot"
+author: "John Rober Marin B."
+date: "2 de febrero de 2019"
+output: html_document
+---
+
+
+
+#mi primer markdown para ggplot
+## configuraciones
+
+```{r configuraciones, include=FALSE}
+setwd("~/GitHub/Hello_word")
+install.packages("tidyverse")
+install.packages("treemap")
+install.packages("openair")
+install.packages("quantmod")
+install.packages("readxl")
+install.packages("lubridate")
+
+#instalo librerias
+
+library("tidyverse")
+library("treemap")
+library("openair")
+library("quantmod")
+library("lubridate")
+
+
+
+```
+
+
+
+```{r gramatica, echo=FALSE}
+
+#GRAMATICA DE LOS GRAFICOS
+
+ggplot(data = diamonds, aes(x=carat, y=price)) +
+geom_point() +
+stat_smooth(method = lm) +
+scale_x_log10() + 
+scale_y_log10()
+
+```
